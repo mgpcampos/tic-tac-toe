@@ -54,6 +54,17 @@ char checkWinner(char board[3][3]) {
     return ' '; // Nenhum vencedor ainda
 }
 
+int boardFull(char board[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (board[i][j] == ' ') {
+                return 0; // O tabuleiro ainda tem espaços vazios
+            }
+        }
+    }
+    return 1; // O tabuleiro está cheio
+}
+
 int main() {
 
 }
