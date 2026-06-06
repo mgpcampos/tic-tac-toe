@@ -66,5 +66,25 @@ int boardFull(char board[3][3]) {
 }
 
 int main() {
-
+    char currentPlayer = 'X';
+    char winner = ' ';
+    
+    while (winner == ' ' && !boardFull(board)) {
+        printBoard(board);
+        printf("Jogador %c, é sua vez.\n", currentPlayer);
+        
+        if (makeMove(board, currentPlayer)) {
+            winner = checkWinner(board);
+            if (winner != ' ') {
+                printf("Parabéns! Jogador %c venceu!\n", winner);
+            } else if (boardFull(board)) {
+                printf("Empate! O tabuleiro está cheio.\n");
+            } else {
+                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X'; // Alterna o jogador
+            }
+        }
+    }
+    
+    printBoard(board);
+    return 0;
 }
