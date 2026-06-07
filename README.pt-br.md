@@ -6,7 +6,9 @@ Este repositório hospeda o código-fonte do **Jogo da Velha** desenvolvido como
 
 | Nome Completo         |
 | :---                  |
-| Mateus G. P. Campos   |
+| Arthur M. Agassi        |
+| Matheus A. Ambrosio     |
+| Mateus G. P. Campos     |
 
 ---
 
