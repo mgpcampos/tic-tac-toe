@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define TAMANHO 3
 #define CELULA_VAZIA ' '
@@ -56,7 +57,7 @@ int exibir_primeiro_menu() {
     exibir_titulo();
     printf("1. Jogador vs Jogador\n");
     printf("2. Jogador vs Computador\n");
-    printf("Insira a opção: ");
+    printf("Insira uma opção: ");
 
     do {
         scanf("%d", &opcao);
@@ -71,8 +72,12 @@ int exibir_segundo_menu() {
     exibir_titulo();
     printf("Nível de inteligência do computador:\n");
     printf("1. Básico (aleatório)\n");
-    printf("1. Intermediário (ofensivo/defensivo)\n");
-    printf("Insira a opção: ");
+    printf("2. Intermediário (ofensivo/defensivo)\n");
+    printf("Insira uma opção: ");
+
+    do {
+        scanf("%d", &opcao);
+    } while (opcao != 1 && opcao != 2);
 
     return opcao;
 }
@@ -84,7 +89,7 @@ bool posicao_valida(char tabuleiro[TAMANHO][TAMANHO], int celula) {
 
 void ler_jogada(char tabuleiro[TAMANHO][TAMANHO], int *celula) {
     do {
-        printf("Insira a célula almejada [1-9]: ");
+        printf("Insira a célula desejada [1-9]: ");
         scanf("%d", celula);
     } while (!posicao_valida(tabuleiro, *celula));
 }
@@ -258,19 +263,50 @@ void jogada_computador_intermediario(char tabuleiro[TAMANHO][TAMANHO],
 
 
 int main() {
+    srand(time(NULL));
     int modo;
+    char tabuleiro[TAMANHO][TAMANHO];
+    inicializar_tabuleiro(tabuleiro);
 
-    modo = exibir_primeiro_menu();
+    int nivel_ia = 1;
+    if (modo == 2)
+        nivel_ia = exibir_segundo_menu();
 
+    char simbolos[2] = {'X', 'O'};
+    int turno = 0; /* 0 = X, 1 = O */
+    char resultado;
 
+    printf("X começa. Boa sorte!\n");
 
+    while ((resultado = verificar_fim(tabuleiro)) == 0) {
+        exibir_tabuleiro(tabuleiro);
+        char simbolo_atual = simbolos[turno];
 
-    char tabuleiro[TAMANHO][TAMANHO] = {
-        {'X', 'O', 'X'},
-        {'O', 'X', 'O'},
-        {'X', 'O', 'X'}
-    };
-    // inicializar_tabuleiro(tabuleiro);
-    // exibir_tabuleiro(tabuleiro);
+        if (modo == 2 && turno == 1) {
+        /* Vez do computador */
+        printf("Vez do computador (%c)...\n", simbolo_atual);
+        if (nivel_ia == 1)
+            jogada_computador_basico(tabuleiro, simbolo_atual);
+        else
+            jogada_computador_intermediario(tabuleiro, simbolo_atual, simbolos[0]);
+        } else {
+        /* Vez do humano */
+        printf("Vez do jogador %c:\n", simbolo_atual);
+        int linha, coluna, celula;
+        converter_celula_para_coordenadas(celula, &linha, &coluna);
+        ler_jogada(tabuleiro, &celula);
+        tabuleiro[linha][coluna] = simbolo_atual;
+        }
+
+        turno = 1 - turno; /* Alterna entre 0 e 1 */
+    }
+
+    exibir_tabuleiro(tabuleiro);
+
+    if (resultado == 'E')
+        printf("Empate! Nenhum vencedor desta vez.\n\n");
+    else
+        printf("Jogador %c venceu! Parabéns!\n\n", resultado);
+
     return 0;
 }
