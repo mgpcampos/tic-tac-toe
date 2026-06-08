@@ -110,6 +110,22 @@ bool verificar_vitoria(char tabuleiro[TAMANHO][TAMANHO], char simbolo) {
     return false;
 }
 
+bool tabuleiro_cheio(char tabuleiro[TAMANHO][TAMANHO]) {
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            if (tabuleiro[i][j] == CELULA_VAZIA) return false;
+        }
+    }
+    return true;
+}
+
+char verificar_fim(char tabuleiro[TAMANHO][TAMANHO]) {
+    if (verificar_vitoria(tabuleiro, 'X')) return 'X';
+    if (verificar_vitoria(tabuleiro, 'O')) return 'O';
+    if (tabuleiro_cheio(tabuleiro)) return 'E';
+    return 0;
+}
+
 
 
 int main() {
