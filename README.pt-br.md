@@ -88,17 +88,21 @@ jogo.exe
    - **1**: Jogador vs Jogador
    - **2**: Jogador vs Computador
 
-2. O tabuleiro é numerado de 0 a 8:
+2. Depois, selecione o nível de dificuldade:
+   - **1**: Nível Básico (Movimentos Aleatórios)
+   - **2**: Nível Intermediário (Bloqueia Ameaças)
+
+3. O tabuleiro é numerado de 1 a 9:
    ```
-   0 | 1 | 2
+   1 | 2 | 3
    ---------
-   3 | 4 | 5
+   4 | 5 | 6
    ---------
-   6 | 7 | 8
+   7 | 8 | 9
    ```
 
-3. Os jogadores alternam turnos, inserindo o número da posição desejada
-4. O jogo termina em vitória ou empate
+4. Os jogadores alternam turnos, inserindo o número da posição desejada
+5. O jogo termina em vitória ou empate
 
 ---
 

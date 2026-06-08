@@ -16,7 +16,6 @@ void limpar_tela() {
 #endif
     fflush(stdout);
 }
-
 void exibir_titulo() {
     printf("\n");
     printf("     ██╗ ██████╗  ██████╗  ██████╗     ██████╗  █████╗     ██╗   ██╗███████╗██╗     ██╗  ██╗ █████╗         \n");
@@ -27,7 +26,6 @@ void exibir_titulo() {
     printf(" ╚════╝  ╚═════╝  ╚═════╝  ╚═════╝     ╚═════╝ ╚═╝  ╚═╝      ╚═══╝  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝        \n");
     printf("\n");
 }
-
 void inicializar_tabuleiro(char tabuleiro[TAMANHO][TAMANHO]) {
     for (int i = 0; i < TAMANHO; i++) {
         for (int j = 0; j < TAMANHO; j++) {
@@ -82,9 +80,20 @@ int exibir_segundo_menu() {
     return opcao;
 }
 
+void converter_celula_para_coordenadas(int celula, int *linha, int *coluna) {
+    int indice = celula - 1;
+    *linha = indice / TAMANHO;
+    *coluna = indice % TAMANHO;
+}
+
 bool posicao_valida(char tabuleiro[TAMANHO][TAMANHO], int celula) {
-    if (celula < 1 || celula > 9) return false;
-    else return true;
+  int linha, coluna;
+
+  if (celula < 1 || celula > 9) return false;
+
+  converter_celula_para_coordenadas(celula, &linha, &coluna);
+
+  return tabuleiro[linha][coluna] == CELULA_VAZIA;
 }
 
 void ler_jogada(char tabuleiro[TAMANHO][TAMANHO], int *celula) {
@@ -142,16 +151,10 @@ char verificar_fim(char tabuleiro[TAMANHO][TAMANHO]) {
     return 0;
 }
 
-void converter_celula_para_coordenadas(int celula, int *linha, int *coluna) {
-    int indice = celula - 1;
-    *linha = indice / TAMANHO;
-    *coluna = indice % TAMANHO;
-}
-
 void jogada_computador_basico(char tabuleiro[TAMANHO][TAMANHO], char simbolo) {
     int celula, linha, coluna;
     do {
-        celula = rand() % TAMANHO;
+        celula = rand() % (TAMANHO * TAMANHO) + 1;
     } while (!posicao_valida(tabuleiro, celula));
 
     converter_celula_para_coordenadas(celula, &linha, &coluna);
@@ -268,9 +271,11 @@ int main() {
     char tabuleiro[TAMANHO][TAMANHO];
     inicializar_tabuleiro(tabuleiro);
 
-    int nivel_ia = 1;
+    modo = exibir_primeiro_menu();
+
+    int nivel = 1;
     if (modo == 2)
-        nivel_ia = exibir_segundo_menu();
+        nivel = exibir_segundo_menu();
 
     char simbolos[2] = {'X', 'O'};
     int turno = 0; /* 0 = X, 1 = O */
@@ -285,7 +290,7 @@ int main() {
         if (modo == 2 && turno == 1) {
         /* Vez do computador */
         printf("Vez do computador (%c)...\n", simbolo_atual);
-        if (nivel_ia == 1)
+        if (nivel == 1)
             jogada_computador_basico(tabuleiro, simbolo_atual);
         else
             jogada_computador_intermediario(tabuleiro, simbolo_atual, simbolos[0]);
@@ -293,8 +298,8 @@ int main() {
         /* Vez do humano */
         printf("Vez do jogador %c:\n", simbolo_atual);
         int linha, coluna, celula;
-        converter_celula_para_coordenadas(celula, &linha, &coluna);
         ler_jogada(tabuleiro, &celula);
+        converter_celula_para_coordenadas(celula, &linha, &coluna);
         tabuleiro[linha][coluna] = simbolo_atual;
         }
 

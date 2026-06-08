@@ -68,18 +68,18 @@ cd tic-tac-toe/
 ### 2. Compile the Code
 
 ```bash
-gcc -o jogo main.c
+gcc -o game main.c
 ```
 
 ### 3. Run the Game
 
 ```bash
-./jogo
+./game
 ```
 
 On Windows:
 ```bash
-jogo.exe
+game.exe
 ```
 
 ---
@@ -90,17 +90,21 @@ jogo.exe
    - **1**: Player vs Player
    - **2**: Player vs Computer
 
-2. The board is numbered 0 to 8:
+2. Then, select the difficulty level:
+   - **1**: Basic (Random Moves)
+   - **2**: Intermediate (Blocks Threats)
+
+3. The board is numbered 1 to 9:
    ```
-   0 | 1 | 2
+   1 | 2 | 3
    ---------
-   3 | 4 | 5
+   4 | 5 | 6
    ---------
-   6 | 7 | 8
+   7 | 8 | 9
    ```
 
-3. Players alternate turns by entering the desired position number
-4. The game ends in victory or draw
+4. Players alternate turns by entering the desired position number
+5. The game ends in victory or draw
 
 ---
 
