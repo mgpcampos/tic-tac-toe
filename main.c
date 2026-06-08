@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define TAMANHO 3
 #define CELULA_VAZIA ' '
@@ -65,11 +66,58 @@ int exibir_menu() {
     return opcao;
 }
 
+bool posicao_valida(char tabuleiro[TAMANHO][TAMANHO], int celula) {
+    if (celula < 1 || celula > 9) return false;
+    else return true;
+}
+
+void ler_jogada(char tabuleiro[TAMANHO][TAMANHO], int *celula) {
+    do {
+        printf("Insira a célula almejada [1-9]: ");
+        scanf("%d", celula);
+    } while (!posicao_valida(tabuleiro, *celula));
+}
+
+bool verificar_vitoria(char tabuleiro[TAMANHO][TAMANHO], char simbolo) {
+    // Laço responsável por varrer as linhas
+    for (int i = 0; i < TAMANHO; i++) {
+        if (tabuleiro[i][0] == simbolo &&
+            tabuleiro[i][1] == simbolo &&
+            tabuleiro[i][2] == simbolo)
+            return true;
+    }
+
+    // Colunas
+    for (int j = 0; j < TAMANHO; j++) {
+        if (tabuleiro[0][j] == simbolo &&
+            tabuleiro[1][j] == simbolo &&
+            tabuleiro[2][j] == simbolo)
+            return true;
+    }
+
+    // Diagonal da esquerda para a direita
+    if (tabuleiro[0][0] == simbolo &&
+        tabuleiro[1][1] == simbolo &&
+        tabuleiro[2][2] == simbolo)
+        return true;
+
+    // Diagonal da direita para a esquerda
+    if (tabuleiro[0][2] == simbolo &&
+        tabuleiro[1][1] == simbolo &&
+        tabuleiro[2][0] == simbolo)
+        return true;
+
+    return false;
+}
+
+
+
 int main() {
     int modo;
 
     modo = exibir_menu();
-    printf("%d\n", modo);
+
+
 
 
     char tabuleiro[TAMANHO][TAMANHO] = {
