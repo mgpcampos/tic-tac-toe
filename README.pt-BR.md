@@ -4,11 +4,11 @@ Este repositório hospeda o código-fonte do **Jogo da Velha** desenvolvido como
 
 ### Integrantes do Grupo
 
-| Nome Completo         |
-| :---                  |
+| Nome Completo           |
+| :---                    |
 | Arthur M. Agassi        |
-| Matheus A. Ambrosio     |
 | Mateus G. P. Campos     |
+| Matheus A. Ambrosio     |
 
 ---
 

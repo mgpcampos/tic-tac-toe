@@ -9,8 +9,8 @@ This repository hosts the source code of **Tic-Tac-Toe** developed as part of th
 | Full Name               |
 | :---                    |
 | Arthur M. Agassi        |
-| Matheus A. Ambrosio     |
 | Mateus G. P. Campos     |
+| Matheus A. Ambrosio     |
 
 ---
 
