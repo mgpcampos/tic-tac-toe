@@ -28,6 +28,22 @@ void exibir_titulo() {
     printf("\n");
 }
 
+void exibir_instrucoes() {
+    limpar_tela();
+    exibir_titulo();
+    printf("Para jogar, escolha uma posição digitando o número correspondente [1-9].\n"); 
+    printf("\n");
+    printf("%48s 1 | 2 | 3 \n", "");
+    printf("%48s---+---+---\n", "");
+    printf("%48s 4 | 5 | 6 \n", "");
+    printf("%48s---+---+---\n", "");
+    printf("%48s 7 | 8 | 9 \n", "");
+    printf("\n");
+    printf("Pressione Enter para continuar...");
+
+    while (getchar() != '\n');
+}
+
 void inicializar_tabuleiro(char tabuleiro[TAMANHO][TAMANHO]) {
     for (int i = 0; i < TAMANHO; i++) {
         for (int j = 0; j < TAMANHO; j++) {
@@ -56,16 +72,9 @@ int exibir_primeiro_menu() {
     int opcao;
     limpar_tela();
     exibir_titulo();
-    printf("Instruções:\n");
-    printf("\n");
-    printf(" 1 | 2 | 3\n");
-    printf("---+---+---\n");
-    printf(" 4 | 5 | 6\n");
-    printf("---+---+---\n");
-    printf(" 7 | 8 | 9\n");
     printf("\n");
     printf("1. Jogador vs Jogador\n");
-    printf("2. Jogador vs Computador\n");
+    printf("2. Jogador vs Computador\n\n");
     printf("Insira uma opção: ");
 
     do {
@@ -81,7 +90,7 @@ int exibir_segundo_menu() {
     exibir_titulo();
     printf("Nível de inteligência do computador:\n");
     printf("1. Básico (aleatório)\n");
-    printf("2. Intermediário (ofensivo/defensivo)\n");
+    printf("2. Intermediário (ofensivo/defensivo)\n\n");
     printf("Insira uma opção: ");
 
     do {
@@ -270,6 +279,8 @@ int main() {
     int modo;
     char tabuleiro[TAMANHO][TAMANHO];
     inicializar_tabuleiro(tabuleiro);
+
+    exibir_instrucoes();
 
     modo = exibir_primeiro_menu();
 
