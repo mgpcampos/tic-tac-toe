@@ -270,7 +270,7 @@ void jogada_computador_intermediario(char tabuleiro[TAMANHO][TAMANHO],
                                   simbolo_computador))
         return;
 
-    // 3. Fallback: jogada aleatória
+    // 3. Alternativa: jogada aleatória
     jogada_computador_basico(tabuleiro, simbolo_computador);
 }
 
