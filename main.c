@@ -56,6 +56,14 @@ int exibir_primeiro_menu() {
     int opcao;
     limpar_tela();
     exibir_titulo();
+    printf("Instruções:\n");
+    printf("\n");
+    printf(" 1 | 2 | 3\n");
+    printf("---+---+---\n");
+    printf(" 4 | 5 | 6\n");
+    printf("---+---+---\n");
+    printf(" 7 | 8 | 9\n");
+    printf("\n");
     printf("1. Jogador vs Jogador\n");
     printf("2. Jogador vs Computador\n");
     printf("Insira uma opção: ");
@@ -150,6 +158,10 @@ char verificar_fim(char tabuleiro[TAMANHO][TAMANHO]) {
     return 0;
 }
 
+/*
+ * Nível básico: escolhe aleatoriamente uma célula livre entre 1 e 9
+ * e marca a jogada no tabuleiro.
+ */
 void jogada_computador_basico(char tabuleiro[TAMANHO][TAMANHO], char simbolo) {
     int celula, linha, coluna;
     do {
@@ -161,17 +173,13 @@ void jogada_computador_basico(char tabuleiro[TAMANHO][TAMANHO], char simbolo) {
 }
 
 /*
- * Procura por uma linha/coluna/diagonal onde 'simbolo_busca' já tem 2 peças
- * e uma casa vazia. Se encontrar, coloca 'simbolo_colocar' na casa vazia.
- *
- * Separar busca de colocação é essencial: ao bloquear o jogador, buscamos
- * pelas peças do jogador mas colocamos o símbolo do computador.
- *
- * Retorna 1 se realizou jogada, 0 caso contrário.
+ * Procura uma linha, coluna ou diagonal com duas peças de simbolo_busca
+ * e uma casa vazia. Se encontrar, coloca simbolo_colocar na posição livre.
+ * Retorna 1 se fizer a jogada, ou 0 se não houver oportunidade.
  */
 int tentar_jogada_estrategica(char tabuleiro[TAMANHO][TAMANHO],
                               char simbolo_busca, char simbolo_colocar) {
-    /* Varredura nas linhas */
+    // Varredura nas linhas
     for (int i = 0; i < TAMANHO; i++) {
         int contagem = 0, col_vazia = -1;
         for (int j = 0; j < TAMANHO; j++) {
@@ -186,7 +194,7 @@ int tentar_jogada_estrategica(char tabuleiro[TAMANHO][TAMANHO],
         }
     }
 
-    /* Varredura nas colunas */
+    // Varredura nas colunas
     for (int j = 0; j < TAMANHO; j++) {
         int contagem = 0, lin_vazia = -1;
         for (int i = 0; i < TAMANHO; i++) {
@@ -201,7 +209,7 @@ int tentar_jogada_estrategica(char tabuleiro[TAMANHO][TAMANHO],
         }
     }
 
-    /* Diagonal principal */
+    // Diagonal da esquerda para a direita
     {
         int contagem = 0, pos_vazia = -1;
         for (int i = 0; i < TAMANHO; i++) {
@@ -216,7 +224,7 @@ int tentar_jogada_estrategica(char tabuleiro[TAMANHO][TAMANHO],
         }
     }
 
-    /* Diagonal secundária */
+    // Diagonal da direita para a esquerda
     {
         int contagem = 0, pos_vazia = -1;
         for (int i = 0; i < TAMANHO; i++) {
@@ -237,24 +245,23 @@ int tentar_jogada_estrategica(char tabuleiro[TAMANHO][TAMANHO],
 }
 
 /*
- * IA Intermediária: primeiro tenta vencer, depois bloquear, depois joga
- * aleatório. Isso vai além do requisito (apenas defensivo) e garante pontos
- * bônus.
+ * Nível intermediário: primeiro tenta vencer, depois bloquear, depois joga
+ * aleatório.
  */
 void jogada_computador_intermediario(char tabuleiro[TAMANHO][TAMANHO],
                                      char simbolo_computador,
                                      char simbolo_jogador) {
-    /* 1. Verifica se o computador pode vencer na próxima jogada */
+    // 1. Verifica se o computador pode vencer na próxima jogada
     if (tentar_jogada_estrategica(tabuleiro, simbolo_computador,
                                   simbolo_computador))
         return;
 
-    /* 2. Bloqueia o jogador se ele estiver prestes a ganhar */
+    // 2. Bloqueia o jogador se ele estiver prestes a ganhar
     if (tentar_jogada_estrategica(tabuleiro, simbolo_jogador,
                                   simbolo_computador))
         return;
 
-    /* 3. Fallback: jogada aleatória */
+    // 3. Fallback: jogada aleatória
     jogada_computador_basico(tabuleiro, simbolo_computador);
 }
 
@@ -270,7 +277,7 @@ int main() {
     if (modo == 2) nivel = exibir_segundo_menu();
 
     char simbolos[2] = {'X', 'O'};
-    int turno = 0; /* 0 = X, 1 = O */
+    int turno = 0;  // 0 = X, 1 = O
     char resultado;
 
     printf("X começa. Boa sorte!\n");
@@ -280,7 +287,7 @@ int main() {
         char simbolo_atual = simbolos[turno];
 
         if (modo == 2 && turno == 1) {
-            /* Vez do computador */
+            // Vez do computador
             printf("Vez do computador (%c)...\n", simbolo_atual);
             if (nivel == 1)
                 jogada_computador_basico(tabuleiro, simbolo_atual);
@@ -288,7 +295,7 @@ int main() {
                 jogada_computador_intermediario(tabuleiro, simbolo_atual,
                                                 simbolos[0]);
         } else {
-            /* Vez do humano */
+            // Vez do humano
             printf("Vez do jogador %c:\n", simbolo_atual);
             int linha, coluna, celula;
             ler_jogada(tabuleiro, &celula);
@@ -296,7 +303,7 @@ int main() {
             tabuleiro[linha][coluna] = simbolo_atual;
         }
 
-        turno = 1 - turno; /* Alterna entre 0 e 1 */
+        turno = 1 - turno;  // Alterna entre 0 e 1
     }
 
     exibir_tabuleiro(tabuleiro);

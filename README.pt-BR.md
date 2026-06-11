@@ -113,7 +113,6 @@ tic-tac-toe/
 ├── main.c              # Código-fonte principal do jogo
 ├── LICENSE             # Licença do projeto
 ├── README.md           # Documentação em inglês
-├── README.pt-br.md     # Documentação em português
-├── specs.md            # Especificações do projeto
+├── README.pt-BR.md     # Documentação em português
 └── .gitignore          # Arquivo Git para ignorar arquivos compilados
 ```

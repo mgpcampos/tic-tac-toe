@@ -1,6 +1,6 @@
 # Tic-Tac-Toe
 
-Visualize este documento também em português: [README.pt-br.md](README.pt-br.md)
+Visualize este documento também em português: [README.pt-BR.md](README.pt-BR.md)
 
 This repository hosts the source code of **Tic-Tac-Toe** developed as part of the **Programming Logic** course project taught by Prof. Marcos Quiles.
 
@@ -115,7 +115,6 @@ tic-tac-toe/
 ├── main.c              # Main game source code
 ├── LICENSE             # Project license
 ├── README.md           # Documentation in English
-├── README.pt-br.md     # Documentation in Portuguese
-├── specs.md            # Project specifications
+├── README.pt-BR.md     # Documentation in Portuguese
 └── .gitignore          # Git file for ignoring compiled files
 ```
