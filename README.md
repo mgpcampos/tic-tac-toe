@@ -2,7 +2,7 @@
 
 Visualize este documento também em português: [README.pt-BR.md](README.pt-BR.md)
 
-This repository hosts the source code of **Tic-Tac-Toe** developed as part of the **Programming Logic** course project taught by Prof. Marcos Quiles.
+This repository hosts the source code of **Tic-Tac-Toe** developed as part of the **Programming Logic** course project taught by Prof. Marcos G. Quiles.
 
 ### Group Members
 

@@ -1,6 +1,6 @@
 # Jogo da Velha
 
-Este repositório hospeda o código-fonte do **Jogo da Velha** desenvolvido como parte do trabalho da unidade curricular de **Lógica de Programação** lecionada pelo Prof. Marcos Quiles.
+Este repositório hospeda o código-fonte do **Jogo da Velha** desenvolvido como parte do trabalho da unidade curricular de **Lógica de Programação** lecionada pelo Prof. Marcos G. Quiles.
 
 ### Integrantes do Grupo
 
